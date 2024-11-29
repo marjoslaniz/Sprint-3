@@ -1,6 +1,5 @@
 import express from 'express';
-import { validarSuperHeroe } from '../validators/superHeroeValidator.mjs';
-import { handleValidationErrors } from '../validators/errorMiddleware.mjs';
+
 import { 
     //obtenerSuperheroeMayoresDe30Controller,
     obtenerTodosLosSuperheroesController,
@@ -24,9 +23,9 @@ router.get('/heroes/buscar/:atributo/:valor', buscarSuperheroesPorAtributoContro
 
 //router.get('/superheroes/filtros', obtenerSuperheroesMayoresDe30YConFiltrosController)
 
-router.post('/heroes/nuevo', validarSuperHeroe, handleValidationErrors, nuevoSuperHeroController );
+router.post('/heroes/nuevo', nuevoSuperHeroController );
 
-router.put('/heroes/actualizar/:id', validarSuperHeroe, handleValidationErrors, actualizarSuperHeroController);
+router.put('/heroes/actualizar/:id', actualizarSuperHeroController);
 router.delete('/heroes/eliminar/:id', eliminarSuperHeroController);
 router.delete('/heroes/eliminarpornombre/:nombreReal', eliminarSuperHeroPorNombreController);
 
