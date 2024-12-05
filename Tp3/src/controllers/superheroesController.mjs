@@ -13,7 +13,12 @@ import {
     eliminarSuperHeroPorNombre
 } from '../services/superheroesService.mjs';
 
-import { renderizarSuperheroe, renderizarListaSuperHeroes,  renderizarMensajeDeOperacion } from '../views/responseViews.mjs';
+import { renderizarSuperheroe, 
+        renderizarListaSuperHeroes,  
+        renderizarMensajeDeOperacion 
+} from '../views/responseViews.mjs';
+
+import { navBarLinks } from '../config/navabarLinks.mjs';
 
 export async function obtenerSuperheroePorIdController(req, res){
     const {id} = req.params;
@@ -26,11 +31,66 @@ export async function obtenerSuperheroePorIdController(req, res){
     }
 }
 
+export const renderizarQuinesSomosController = async (req, res) => {
+    res.render(
+        'quienessomoslayout', 
+        {
+            layout: 'layout',
+            navbarLinks: navBarLinks,
+            title: 'Quienes somos', 
+            message: req.query.message || '', 
+        }   
+    );
+};
 
-export async function obtenerTodosLosSuperheroesController(req, res){
+export const renderizarInicioController = async (req, res) => {
+    res.render(
+        'indexlayout', 
+        {
+            layout: 'layout',
+            navbarLinks: navBarLinks,
+            title: 'Inicio', 
+            message: req.query.message || '', 
+        }   
+    );
+};
+
+/*export async function obtenerTodosLosSuperheroesController(req, res){
     const superheroes = await obtenerTodosLosSuperheroes();
-    res.send(renderizarListaSuperHeroes(superheroes));
-}
+    //res.send(renderizarListaSuperHeroes(superheroes));
+    res.render('dashboard',{ superheroes });
+}*/
+
+export const renderizarTodosLosSuperHeroesController = async (req, res) => {
+    try {
+        const superheroes = await obtenerTodosLosSuperheroes();
+        if(superheroes && superheroes.length > 0){
+            //console.log(superheroes);
+            res.render(
+                'dashboard', 
+                {
+                    layout: 'layout',
+                    navbarLinks: navBarLinks,
+                    title: 'Todos los superheroes',
+                    message: req.query.message || '', 
+                    superheroes
+                });
+            //res.send(renderizarListaSuperHeroes(superheroes));
+        } else {
+            res.render(
+                'dashboard', 
+                {
+                    title: 'Todos los superheroes',  
+                    message: req.query.message || '',
+                    superheroes: []
+                }
+            );
+            //res.status(404).send({mensaje: "Superheroes no encontrados"});
+        }
+    } catch (error) {
+        res.status(500).send({mensaje: 'Error al obtener todos los superhéroes', error: error.message});
+    }
+};
 
 
 export async function buscarSuperheroesPorAtributoController(req, res){

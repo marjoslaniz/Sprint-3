@@ -14,7 +14,7 @@ app.set('view engine', 'ejs');
 //connectDB(); //Conectamos a la base de datos de MongoDB
 
 //Configracion de Rutas
-app.use('/users', userRoutes);
+app.use('/usuarios', userRoutes);
 
 
 //Manejo de errores para rutas no encontradas

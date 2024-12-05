@@ -3,7 +3,7 @@ import { validarSuperHeroe } from '../validators/superHeroeValidator.mjs';
 import { handleValidationErrors } from '../validators/errorMiddleware.mjs';
 import { 
     //obtenerSuperheroeMayoresDe30Controller,
-    obtenerTodosLosSuperheroesController,
+    //obtenerTodosLosSuperheroesController,
     obtenerSuperheroePorIdController,
     buscarSuperheroesPorAtributoController,
     obtenerSuperheroeMayoresDe30Controller,
@@ -11,18 +11,19 @@ import {
     //obtenerSuperheroesMayoresDe30YConFiltrosController,
     actualizarSuperHeroController,
     eliminarSuperHeroController,
-    eliminarSuperHeroPorNombreController
+    eliminarSuperHeroPorNombreController,
+    renderizarTodosLosSuperHeroesController
     
 } from '../controllers/superheroesController.mjs';
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
+/*router.get("/", (req, res) => {
     res.render("dashboard")
-})
+})*/
 
 router.get('/heroes/mayores-30', obtenerSuperheroeMayoresDe30Controller),
-router.get('/heroes', obtenerTodosLosSuperheroesController),
+router.get('/heroes/dashboard', renderizarTodosLosSuperHeroesController),
 router.get('/heroes/:id', obtenerSuperheroePorIdController),
 router.get('/heroes/buscar/:atributo/:valor', buscarSuperheroesPorAtributoController);
 
