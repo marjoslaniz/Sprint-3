@@ -12,7 +12,12 @@ import {
     actualizarSuperHeroController,
     eliminarSuperHeroController,
     eliminarSuperHeroPorNombreController,
-    renderizarTodosLosSuperHeroesController
+    renderizarTodosLosSuperHeroesController,
+    renderizarAddSuperheroController,
+    renderizarEditSuperheroController, 
+    renderizarDeleteSuperHeroController,
+    renderizarInicioController, 
+    renderizarQuinesSomosController
     
 } from '../controllers/superheroesController.mjs';
 
@@ -22,15 +27,33 @@ const router = express.Router();
     res.render("dashboard")
 })*/
 
-router.get('/heroes/mayores-30', obtenerSuperheroeMayoresDe30Controller),
+const heroAuthMiddleware = (req, res, next) => {
+    console.log('Hero Authentication Middleware');
+    if(!req.headers.authorization){
+        return res.status(401).send('Unauthorized');
+    }
+    next();
+};
+
 router.get('/heroes/dashboard', renderizarTodosLosSuperHeroesController),
-router.get('/heroes/:id', obtenerSuperheroePorIdController),
+router.get('/heroes/quienessomos', renderizarQuinesSomosController);
+router.get('/heroes/mayores-30', obtenerSuperheroeMayoresDe30Controller),
+
 router.get('/heroes/buscar/:atributo/:valor', buscarSuperheroesPorAtributoController);
 
 //router.get('/superheroes/filtros', obtenerSuperheroesMayoresDe30YConFiltrosController)
+router.get('/heroes/agregar', renderizarAddSuperheroController);
+
+router.get('/heroes/:id/editar', renderizarEditSuperheroController);
+router.get('/heroes/:id/eliminar', renderizarDeleteSuperHeroController);
+
+//ruta general
+router.get('/heroes', renderizarInicioController);
+
+router.get('/heroes/:id', obtenerSuperheroePorIdController),
 
 router.post('/heroes/nuevo', validarSuperHeroe, handleValidationErrors, nuevoSuperHeroController );
-
+router.post('/heroes/:id/editar', validarSuperHeroe, handleValidationErrors, actualizarSuperHeroController);
 router.put('/heroes/actualizar/:id', validarSuperHeroe, handleValidationErrors, actualizarSuperHeroController);
 router.delete('/heroes/eliminar/:id', eliminarSuperHeroController);
 router.delete('/heroes/eliminarpornombre/:nombreReal', eliminarSuperHeroPorNombreController);
