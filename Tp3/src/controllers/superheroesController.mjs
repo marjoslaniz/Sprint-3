@@ -232,7 +232,7 @@ export const actualizarSuperHeroController = async (req, res) => {
     const superheroe = await actualizarSuperHero(id, datosActualizados);
     if(superheroe){
         //res.send(renderizarSuperheroe(superheroe));
-        const superheroes = await obtenerTodosLosSuperHeroes();
+        const superheroes = await obtenerTodosLosSuperheroes();
         res.redirect('/api/heroes/dashboard');
     } else {
         res.status(404).send({mensaje: "error al actualizar el super heroe"});
@@ -241,13 +241,28 @@ export const actualizarSuperHeroController = async (req, res) => {
 
 export const eliminarSuperHeroController = async (req, res) => {
     const { id } = req.params;
-    const superHeroe = await obtenerSuperheroePorId(id);
-    if(superHeroe){
+    //const superHeroe = await obtenerSuperheroePorId(id);
+    try{
+        const resultado = await eliminarSuperHero(id);
+        res.redirect('/api/heroes/dashboard');
+        /*if (resultado){
+            res.redirect('/api/heroes/dashboard');
+        }
+        else{
+            res.redirect('/api/heroes/dashboard');
+        }*/
+    }
+    catch{
+        console.error('Error en el servidor al intentar eliminar el superhéroe', error);
+        res.redirect('/api/heroes/dashboard');
+    }
+    /*if(superHeroe){
         await eliminarSuperHero(id);
         res.send(renderizarMensajeDeOperacion("El superheroe ha sido eliminado", renderizarSuperheroe(superHeroe)));
     } else {
         res.status(404).send(renderizarMensajeDeOperacion("Superheroe no encontrado"));
-    }
+    */
+    
 }
 
 export const eliminarSuperHeroPorNombreController = async (req, res) => {

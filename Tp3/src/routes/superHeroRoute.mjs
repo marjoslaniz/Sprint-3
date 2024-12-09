@@ -54,8 +54,9 @@ router.get('/heroes/:id', obtenerSuperheroePorIdController),
 
 router.post('/heroes/nuevo', validarSuperHeroe, handleValidationErrors, nuevoSuperHeroController );
 router.post('/heroes/:id/editar', validarSuperHeroe, handleValidationErrors, actualizarSuperHeroController);
-router.put('/heroes/actualizar/:id', validarSuperHeroe, handleValidationErrors, actualizarSuperHeroController);
+router.post('/heroes/:id/eliminar', eliminarSuperHeroController);
 router.delete('/heroes/eliminar/:id', eliminarSuperHeroController);
+router.put('/heroes/actualizar/:id', validarSuperHeroe, handleValidationErrors, actualizarSuperHeroController);
 router.delete('/heroes/eliminarpornombre/:nombreReal', eliminarSuperHeroPorNombreController);
 
 export default router;

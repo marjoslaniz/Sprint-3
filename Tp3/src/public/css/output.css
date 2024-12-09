@@ -961,7 +961,7 @@ body {
 .main-index-button {
   border-radius: 0.25rem;
   --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity, 1));
+  background-color: rgb(42 135 161 / var(--tw-bg-opacity, 1));
   padding-top: 1rem;
   padding-bottom: 1rem;
   padding-left: 2rem;
