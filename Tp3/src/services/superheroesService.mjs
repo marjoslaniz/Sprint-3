@@ -28,7 +28,7 @@ export const nuevoSuperHero = async (datosSuperHero) => {
     return heroes.filter(hero => hero.edad > 30); 
   }*/
 
-  export const actualizarSuperHero = async (id, datosActualizados) => {
+export const actualizarSuperHero = async (id, datosActualizados) => {
     return await SuperHeroRepository.actualizarSuperHero(id, datosActualizados);
 }
 
