@@ -15,6 +15,7 @@ export const validarSuperHeroe = [
             }
             return true;
         }),
+
     body('nombreReal')
         .trim()
         .notEmpty().withMessage('El nombre real del superheroe es requerido')
@@ -25,23 +26,14 @@ export const validarSuperHeroe = [
             }
             return true;
         }),
+
     body('edad')
         .trim()
         .notEmpty().withMessage('La edad es un valor requerido')
         .isNumeric().withMessage('La edad debe ser un valor numérico')
         .custom((edad) => edad >= 0).withMessage('La edad debe ser un valor positivo'), 
+        
     body('poderes')
-        /*.isArray({min: 1}).withMessage('Poderes debe ser un array con al menos un elemento')
-        .custom(
-            (poderes) => {
-                for(const poder of poderes){
-                    if(typeof poder !== 'string' || poder.trim().length < 3 || poder.trim().length > 60){
-                        throw new Error('Los poderes deben ser de tipo string entre 3 y 60 caracteres')
-                    }
-                }
-                return true;
-            }
-        )*/
         .custom((value) => {
             // Divido la cadena separada por comas en un array
             const poderesArray = value.split(',').map(poder => poder.trim());

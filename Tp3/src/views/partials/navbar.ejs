@@ -8,11 +8,13 @@
 
     <!-- Opciones de menú -->
     <div class="flex space-x-4">
-        <% navbarLinks.forEach( link => { %>
+       <% navbarLinks.forEach( link => { %>       
             <a href='<%= link.href %>' 
-           class="flex items-center justify-center h-full px-4 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 hover:text-gray-800 dark:hover:text-gray-100 transition-colors duration-200">
+            class="flex items-center justify-center h-full px-4 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 hover:text-gray-800 dark:hover:text-gray-100 transition-colors duration-200">
             <span><%- link.icon %></span>&nbsp;<%= link.text %>
-        </a>
+            </a>
+        
         <% }); %>
+        
     </div>
 </nav>
