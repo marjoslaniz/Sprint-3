@@ -115,7 +115,7 @@ export const renderizarAddSuperheroController = (req, res) => {
         'addSuperhero', 
         {
             layout: 'layout',
-            title: 'Agregar superheroe', 
+            title: 'Agregar Superhéroe', 
             navbarLinks: navBarLinks,
             errors: [], 
             message: req.query.message || ''
@@ -181,8 +181,8 @@ export const renderizarDeleteSuperHeroController = async (req, res) => {
 
 export const nuevoSuperHeroController = async (req, res) => {
     try {
-        /*const datosSuperHero = req.body;
-        const {nombreSuperHeroe, nombreReal, edad, planetaOrigen} = req.body;
+        //const datosSuperHero = req.body;
+        /*const {nombreSuperHeroe, nombreReal, edad, planetaOrigen} = req.body;
         const superheroe = await nuevoSuperHero(datosSuperHero);
         if(superheroe){
             res.send(renderizarSuperheroe(superheroe));
